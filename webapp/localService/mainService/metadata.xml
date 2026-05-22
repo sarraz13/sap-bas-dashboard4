@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://sarra.iliadeconsulting.com:8000/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZC_DASH4_QUERY_CDS" xml:lang="fr" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <EntityType Name="ZC_DASH4_QUERYType" sap:label="Dashboard 4 - Cessions Query" sap:semantics="aggregate" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" sap:filterable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="TotaledProperties" Type="Edm.String" sap:aggregation-role="totaled-properties-list" sap:is-annotation="true" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ContractAccount" Type="Edm.String" MaxLength="12" sap:aggregation-role="dimension" sap:label="Compte de contrats" sap:quickinfo="Nº compte de contrats" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ReminderDate" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:text="ReminderDate_T" sap:label="Date d'impression" sap:quickinfo="Date d'exécution de la relance" sap:creatable="false" sap:updatable="false" sap:semantics="yearmonthday"/>
+                <Property Name="ReminderDate_T" Type="Edm.String" MaxLength="10" sap:label="Date d'impression (Description)" sap:quickinfo="Date d'exécution de la relance" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="CessionDate" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:text="CessionDate_T" sap:label="Date de cession" sap:quickinfo="Date cession créance à un bureau de recouvrement" sap:creatable="false" sap:updatable="false" sap:semantics="yearmonthday"/>
+                <Property Name="CessionDate_T" Type="Edm.String" MaxLength="10" sap:label="Date de cession (Description)" sap:quickinfo="Date cession créance à un bureau de recouvrement" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:label="Société" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ContractId" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:label="Contrat" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:aggregation-role="dimension" sap:label="Devise" sap:quickinfo="Devise de la transaction" sap:creatable="false" sap:updatable="false" sap:value-list="standard" sap:semantics="currency-code"/>
+                <Property Name="Division" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:label="Secteur d'activité" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Partner" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:label="Partenaire" sap:quickinfo="Numéro de partenaire" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="PaymentDate" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:text="PaymentDate_T" sap:label="Date rapprochement" sap:quickinfo="Date de rapprochement" sap:creatable="false" sap:updatable="false" sap:semantics="yearmonthday"/>
+                <Property Name="PaymentDate_T" Type="Edm.String" MaxLength="10" sap:label="Date rapprochement (Description)" sap:quickinfo="Date de rapprochement" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="TotalAmount" Type="Edm.Decimal" Precision="42" Scale="2" sap:aggregation-role="measure" sap:filterable="false" sap:text="TotalAmount_F" sap:unit="Currency" sap:updatable="false" sap:label="TOTALAMOUNT" sap:creatable="false"/>
+                <Property Name="TotalAmount_F" Type="Edm.String" MaxLength="60" sap:label="TOTALAMOUNT (Formaté)" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="CededUnpaid" Type="Edm.Decimal" Precision="42" Scale="0" sap:aggregation-role="measure" sap:filterable="false" sap:text="CededUnpaid_F" sap:updatable="false" sap:label="CEDEDUNPAID" sap:creatable="false"/>
+                <Property Name="CededUnpaid_F" Type="Edm.String" MaxLength="60" sap:label="CEDEDUNPAID (Formaté)" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="CededPaid" Type="Edm.Decimal" Precision="42" Scale="0" sap:aggregation-role="measure" sap:filterable="false" sap:text="CededPaid_F" sap:updatable="false" sap:label="CEDEDPAID" sap:creatable="false"/>
+                <Property Name="CededPaid_F" Type="Edm.String" MaxLength="60" sap:label="CEDEDPAID (Formaté)" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="DaysToPayAfterCession" Type="Edm.Decimal" Precision="42" Scale="0" sap:aggregation-role="measure" sap:filterable="false" sap:text="DaysToPayAfterCession_F" sap:updatable="false" sap:label="DAYSTOPAYAFTERCESSION" sap:creatable="false"/>
+                <Property Name="DaysToPayAfterCession_F" Type="Edm.String" MaxLength="60" sap:label="DAYSTOPAYAFTERCESSION (Formaté)" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="CessionCount" Type="Edm.Decimal" Precision="42" Scale="0" sap:aggregation-role="measure" sap:filterable="false" sap:text="CessionCount_F" sap:updatable="false" sap:label="CESSIONCOUNT" sap:creatable="false"/>
+                <Property Name="CessionCount_F" Type="Edm.String" MaxLength="60" sap:label="CESSIONCOUNT (Formaté)" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Currency" sap:label="Devise (Données de base)" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Currency_ID"/>
+                </Key>
+                <Property Name="Currency_ID" Type="Edm.String" Nullable="false" MaxLength="5" sap:text="CurrencyText" sap:label="Devise" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="CurrencyText" Type="Edm.String" sap:label="Devise (Description)" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+            </EntityType>
+            <EntityType Name="CurrencyResult" sap:label="Devise (Données enregistrées)" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Currency"/>
+                </Key>
+                <Property Name="Currency" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="Devise" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ContractAccount" Type="Edm.String" MaxLength="12" sap:label="Compte de contrats" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ReminderDate" Type="Edm.String" MaxLength="10" sap:text="ReminderDate_T" sap:label="Date d'impression" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ReminderDate_T" Type="Edm.String" sap:label="Date d'impression (Description)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CessionDate" Type="Edm.String" MaxLength="10" sap:text="CessionDate_T" sap:label="Date de cession" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="CessionDate_T" Type="Edm.String" sap:label="Date de cession (Description)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:label="Société" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ContractId" Type="Edm.String" MaxLength="10" sap:label="Contrat" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Division" Type="Edm.String" MaxLength="2" sap:label="Secteur d'activité" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Partner" Type="Edm.String" MaxLength="10" sap:label="Partenaire" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="PaymentDate" Type="Edm.String" MaxLength="10" sap:text="PaymentDate_T" sap:label="Date rapprochement" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="PaymentDate_T" Type="Edm.String" sap:label="Date rapprochement (Description)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ODataQueryAdditionalMetadata" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ODataQueryMetadata"/>
+                </Key>
+                <Property Name="ODataQueryMetadata" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ODataQueryMetadataValue_Current" Type="Edm.String" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ODataQueryMetadataValueAtDefine" Type="Edm.String" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityContainer Name="ZC_DASH4_QUERY_CDS_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ZC_DASH4_QUERY" EntityType="ZC_DASH4_QUERY_CDS.ZC_DASH4_QUERYType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="Currency" EntityType="ZC_DASH4_QUERY_CDS.Currency" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="CurrencyResults" EntityType="ZC_DASH4_QUERY_CDS.CurrencyResult" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="AdditionalMetadata" EntityType="ZC_DASH4_QUERY_CDS.ODataQueryAdditionalMetadata" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <Annotations Target="ZC_DASH4_QUERY_CDS.ZC_DASH4_QUERYType/Currency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Currency ( Master Data )"/>
+                        <PropertyValue Property="CollectionPath" String="Currency"/>
+                        <PropertyValue Property="SearchSupported" Bool="false"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Currency"/>
+                                    <PropertyValue Property="ValueListProperty" String="Currency_ID"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CurrencyText"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="https://sarra.iliadeconsulting.com:8000/sap/opu/odata/sap/ZC_DASH4_QUERY_CDS/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://sarra.iliadeconsulting.com:8000/sap/opu/odata/sap/ZC_DASH4_QUERY_CDS/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

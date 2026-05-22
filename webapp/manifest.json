@@ -1,0 +1,200 @@
+{
+  "_version": "1.83.0",
+  "sap.app": {
+    "id": "com.iliade.dash4.dash4",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:alp",
+      "version": "1.22.0",
+      "toolsId": "6cfaf70a-dda0-43f1-9886-4ef228b2c2d8"
+    },
+    "dataSources": {
+      "ZC_DASHBOARD4_QUERY_CDS_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZC_DASHBOARD4_QUERY_CDS_VAN',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/mainService/ZC_DASHBOARD4_QUERY_CDS_VAN.xml"
+        }
+      },
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      },
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZC_DASHBOARD4_QUERY_CDS/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "ZC_DASHBOARD4_QUERY_CDS_VAN",
+            "annotation"
+          ],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "intent1": {
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          },
+          "semanticObject": "Dashboard",
+          "action": "display",
+          "title": "Cessions",
+          "icon": "sap-icon://home"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.147.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {},
+        "sap.f": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.suite.ui.generic.template": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.iliade.dash4.dash4.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": false,
+          "metadataUrlParams": {
+            "sap-value-list": "none"
+          }
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [],
+      "targets": {}
+    }
+  },
+  "sap.ui.generic.app": {
+    "_version": "1.3.0",
+    "settings": {
+      "forceGlobalRefresh": false,
+      "objectPageHeaderType": "Dynamic",
+      "considerAnalyticalParameters": true,
+      "showDraftToggle": false
+    },
+    "pages": {
+      "AnalyticalListPage|ZC_DASHBOARD4_QUERY": {
+        "entitySet": "ZC_DASHBOARD4_QUERY",
+        "component": {
+          "name": "sap.suite.ui.generic.template.AnalyticalListPage",
+          "list": true,
+          "settings": {
+            "condensedTableLayout": true,
+            "showGoButtonOnFilterBar": false,
+            "autoHide": true,
+            "smartVariantManagement": false,
+            "defaultContentView": "charttable",
+            "tableSettings": {
+              "multiSelect": false,
+              "type": "AnalyticalTable"
+            },
+            "keyPerformanceIndicators": {
+              "CededPaidKPI": {
+                "model": "",
+                "entitySet": "ZC_DASHBOARD4_QUERY",
+                "qualifier": "CededPaidKPI",
+                "filterable": true
+              },
+              "CededUnpaidKPI": {
+                "model": "",
+                "entitySet": "ZC_DASHBOARD4_QUERY",
+                "qualifier": "CededUnpaidKPI",
+                "filterable": true
+              },
+              "CessionCountKPI": {
+                "model": "",
+                "entitySet": "ZC_DASHBOARD4_QUERY",
+                "qualifier": "CessionCountKPI",
+                "filterable": true
+              },
+              "AvgDaysCessionKPI": {
+                "model": "",
+                "entitySet": "ZC_DASHBOARD4_QUERY",
+                "qualifier": "AvgDaysCessionKPI",
+                "filterable": true
+              }
+            }
+          }
+        },
+        "pages": {
+          "ObjectPage|ZC_DASHBOARD4_QUERY": {
+            "entitySet": "ZC_DASHBOARD4_QUERY",
+            "defaultLayoutTypeIfExternalNavigation": "MidColumnFullScreen",
+            "component": {
+              "name": "sap.suite.ui.generic.template.ObjectPage"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "analytical"
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "comiliadedash4dash4"
+  }
+}

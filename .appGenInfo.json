@@ -1,0 +1,28 @@
+{
+  "generationParameters": {
+    "generationDate": "Thu Apr 23 2026 11:48:16 GMT+0000 (Coordinated Universal Time)",
+    "generatorPlatform": "SAP Business Application Studio",
+    "serviceType": "SAP System (ABAP On-Premise)",
+    "metadataFilename": "",
+    "serviceUrl": "http://sarra.iliadeconsulting.com:8000/sap/opu/odata/sap/ZC_DASH4_QUERY_CDS",
+    "appName": "dash4",
+    "appTitle": "Vue cessions",
+    "appDescription": "An SAP Fiori application.",
+    "appNamespace": "com.iliade.dash4",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.147.1",
+    "enableEslint": true,
+    "enableTypeScript": false,
+    "showMockDataInfo": true,
+    "generatorVersion": "1.22.0",
+    "template": "Analytical List Page V2",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [
+      {
+        "type": "Main Entity",
+        "value": "ZC_DASH4_QUERY"
+      }
+    ],
+    "launchText": "To launch the generated application, run the following from the generated application root folder:\n\n```\n    npm start\n```"
+  }
+}

@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Communication.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+
+    <edmx:Reference Uri="/sap/opu/odata/sap/ZC_DASHBOARD4_QUERY_CDS/$metadata">
+        <edmx:Include Namespace="ZC_DASHBOARD4_QUERY_CDS" Alias="SAP"/>
+    </edmx:Reference>
+
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local">
+
+            <Annotations Target="ZC_DASHBOARD4_QUERY_CDS.ZC_DASHBOARD4_QUERYType">
+
+                <!-- =========================================================
+                     KPI 1 — Cédés payés
+                ========================================================== -->
+                <Annotation Term="UI.DataPoint" Qualifier="CededPaidKPI">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Value" Path="Cede_Paye"/>
+                        <PropertyValue Property="Title" String="Cédés payés"/>
+                    </Record>
+                </Annotation>
+
+                <Annotation Term="UI.KPI" Qualifier="CededPaidKPI">
+                    <Record Type="UI.KPIType">
+                        <PropertyValue Property="DataPoint" Path="@UI.DataPoint#CededPaidKPI"/>
+                        <PropertyValue Property="ID" String="CededPaidKPI"/>
+                        <PropertyValue Property="Detail">
+                            <Record Type="UI.KPIDetailType">
+                                <PropertyValue Property="DefaultPresentationVariant">
+                                    <Record Type="UI.PresentationVariantType">
+                                        <PropertyValue Property="Visualizations">
+                                            <Collection>
+                                                <AnnotationPath>@UI.Chart#MainColumnChart</AnnotationPath>
+                                            </Collection>
+                                        </PropertyValue>
+                                    </Record>
+                                </PropertyValue>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+
+                <!-- =========================================================
+                     KPI 2 — Cédés impayés
+                ========================================================== -->
+                <Annotation Term="UI.DataPoint" Qualifier="CededUnpaidKPI">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Value" Path="Cede_Impaye"/>
+                        <PropertyValue Property="Title" String="Cédés impayés"/>
+                    </Record>
+                </Annotation>
+
+                <Annotation Term="UI.KPI" Qualifier="CededUnpaidKPI">
+                    <Record Type="UI.KPIType">
+                        <PropertyValue Property="DataPoint" Path="@UI.DataPoint#CededUnpaidKPI"/>
+                        <PropertyValue Property="ID" String="CededUnpaidKPI"/>
+                        <PropertyValue Property="Detail">
+                            <Record Type="UI.KPIDetailType">
+                                <PropertyValue Property="DefaultPresentationVariant">
+                                    <Record Type="UI.PresentationVariantType">
+                                        <PropertyValue Property="Visualizations">
+                                            <Collection>
+                                                <AnnotationPath>@UI.Chart#MainColumnChart</AnnotationPath>
+                                            </Collection>
+                                        </PropertyValue>
+                                    </Record>
+                                </PropertyValue>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+
+                <!-- =========================================================
+                     KPI 3 — Total cessions
+                ========================================================== -->
+                <Annotation Term="UI.DataPoint" Qualifier="CessionCountKPI">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Value" Path="Nombre_Cessions"/>
+                        <PropertyValue Property="Title" String="Total cessions"/>
+                    </Record>
+                </Annotation>
+
+                <Annotation Term="UI.KPI" Qualifier="CessionCountKPI">
+                    <Record Type="UI.KPIType">
+                        <PropertyValue Property="DataPoint" Path="@UI.DataPoint#CessionCountKPI"/>
+                        <PropertyValue Property="ID" String="CessionCountKPI"/>
+                        <PropertyValue Property="Detail">
+                            <Record Type="UI.KPIDetailType">
+                                <PropertyValue Property="DefaultPresentationVariant">
+                                    <Record Type="UI.PresentationVariantType">
+                                        <PropertyValue Property="Visualizations">
+                                            <Collection>
+                                                <AnnotationPath>@UI.Chart#MainColumnChart</AnnotationPath>
+                                            </Collection>
+                                        </PropertyValue>
+                                    </Record>
+                                </PropertyValue>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+
+                <!-- =========================================================
+                     KPI 4 — Délai moyen après cession
+                ========================================================== -->
+                <Annotation Term="UI.DataPoint" Qualifier="AvgDaysCessionKPI">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Value" Path="Jours_Paiement_Apres_Cession"/>
+                        <PropertyValue Property="Title" String="Délai moyen cession"/>
+                    </Record>
+                </Annotation>
+
+                <Annotation Term="UI.KPI" Qualifier="AvgDaysCessionKPI">
+                    <Record Type="UI.KPIType">
+                        <PropertyValue Property="DataPoint" Path="@UI.DataPoint#AvgDaysCessionKPI"/>
+                        <PropertyValue Property="ID" String="AvgDaysCessionKPI"/>
+                        <PropertyValue Property="Detail">
+                            <Record Type="UI.KPIDetailType">
+                                <PropertyValue Property="DefaultPresentationVariant">
+                                    <Record Type="UI.PresentationVariantType">
+                                        <PropertyValue Property="Visualizations">
+                                            <Collection>
+                                                <AnnotationPath>@UI.Chart#MainColumnChart</AnnotationPath>
+                                            </Collection>
+                                        </PropertyValue>
+                                    </Record>
+                                </PropertyValue>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+
+                <!-- =========================================================
+                     MAIN CHART — Payé vs Impayé par statut
+                ========================================================== -->
+                <Annotation Term="UI.Chart" Qualifier="MainColumnChart">
+                    <Record Type="UI.ChartDefinitionType">
+
+                        <PropertyValue Property="Title" String="Payé vs Impayé par statut de cession"/>
+
+                        <PropertyValue Property="ChartType"
+                                       EnumMember="UI.ChartType/Column"/>
+
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>Statut_Cession</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+
+                        <PropertyValue Property="DimensionAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension"
+                                                   PropertyPath="Statut_Cession"/>
+                                    <PropertyValue Property="Role"
+                                                   EnumMember="UI.ChartDimensionRoleType/Category"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>Cede_Paye</PropertyPath>
+                                <PropertyPath>Cede_Impaye</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+
+                        <PropertyValue Property="MeasureAttributes">
+                            <Collection>
+
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="Measure"
+                                                   PropertyPath="Cede_Paye"/>
+                                    <PropertyValue Property="Role"
+                                                   EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+                                </Record>
+
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="Measure"
+                                                   PropertyPath="Cede_Impaye"/>
+                                    <PropertyValue Property="Role"
+                                                   EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+                                </Record>
+
+                            </Collection>
+                        </PropertyValue>
+
+                    </Record>
+                </Annotation>
+
+                <!-- =========================================================
+                     VF1 — Cessions par motif
+                ========================================================== -->
+                <Annotation Term="UI.Chart" Qualifier="VFCessionReason">
+
+                    <Record Type="UI.ChartDefinitionType">
+
+                        <PropertyValue Property="Title"
+                                       String="Cessions par motif"/>
+
+                        <PropertyValue Property="ChartType"
+                                       EnumMember="UI.ChartType/Donut"/>
+
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>Motif_Cession</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+
+                        <PropertyValue Property="DimensionAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension"
+                                                   PropertyPath="Motif_Cession"/>
+                                    <PropertyValue Property="Role"
+                                                   EnumMember="UI.ChartDimensionRoleType/Category"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>Nombre_Cessions</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+
+                        <PropertyValue Property="MeasureAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="Measure"
+                                                   PropertyPath="Nombre_Cessions"/>
+                                    <PropertyValue Property="Role"
+                                                   EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+
+                    </Record>
+                </Annotation>
+
+                <Annotation Term="UI.PresentationVariant"
+                            Qualifier="VFCessionReason">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="Visualizations">
+                            <Collection>
+                                <AnnotationPath>@UI.Chart#VFCessionReason</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+
+                <!-- =========================================================
+                     VF2 — Répartition des cessions par statut
+                ========================================================== -->
+                <Annotation Term="UI.Chart" Qualifier="VFPayeImpaye">
+
+                    <Record Type="UI.ChartDefinitionType">
+
+                        <PropertyValue Property="Title"
+                                       String="Cessions par statut"/>
+
+                        <PropertyValue Property="ChartType"
+                                       EnumMember="UI.ChartType/Donut"/>
+
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>Statut_Cession</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+
+                        <PropertyValue Property="DimensionAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension"
+                                                   PropertyPath="Statut_Cession"/>
+                                    <PropertyValue Property="Role"
+                                                   EnumMember="UI.ChartDimensionRoleType/Category"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>Nombre_Cessions</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+
+                        <PropertyValue Property="MeasureAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="Measure"
+                                                   PropertyPath="Nombre_Cessions"/>
+                                    <PropertyValue Property="Role"
+                                                   EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+
+                    </Record>
+                </Annotation>
+
+                <Annotation Term="UI.PresentationVariant"
+                            Qualifier="VFPayeImpaye">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="Visualizations">
+                            <Collection>
+                                <AnnotationPath>@UI.Chart#VFPayeImpaye</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+
+                <!-- =========================================================
+                     VF3 — Tendance des cessions par mois
+                ========================================================== -->
+                <Annotation Term="UI.Chart" Qualifier="VFUnpaidTrend">
+
+                    <Record Type="UI.ChartDefinitionType">
+
+                        <PropertyValue Property="Title"
+                                       String="Tendance des cessions par mois"/>
+
+                        <PropertyValue Property="ChartType"
+                                       EnumMember="UI.ChartType/Line"/>
+
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>Date_Creation_Facture</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+
+                        <PropertyValue Property="DimensionAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension"
+                                                   PropertyPath="Date_Creation_Facture"/>
+                                    <PropertyValue Property="Role"
+                                                   EnumMember="UI.ChartDimensionRoleType/Category"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>Nombre_Cessions</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+
+                        <PropertyValue Property="MeasureAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="Measure"
+                                                   PropertyPath="Nombre_Cessions"/>
+                                    <PropertyValue Property="Role"
+                                                   EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+
+                    </Record>
+                </Annotation>
+
+                <Annotation Term="UI.PresentationVariant"
+                            Qualifier="VFUnpaidTrend">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="Visualizations">
+                            <Collection>
+                                <AnnotationPath>@UI.Chart#VFUnpaidTrend</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+
+                <!-- =========================================================
+                     VF4 — Montant total par partenaire
+                ========================================================== -->
+                <Annotation Term="UI.Chart" Qualifier="VFUnpaidByPartner">
+
+                    <Record Type="UI.ChartDefinitionType">
+
+                        <PropertyValue Property="Title"
+                                       String="Montant total par partenaire"/>
+
+                        <PropertyValue Property="ChartType"
+                                       EnumMember="UI.ChartType/Bar"/>
+
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>Partenaire</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+
+                        <PropertyValue Property="DimensionAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension"
+                                                   PropertyPath="Partenaire"/>
+                                    <PropertyValue Property="Role"
+                                                   EnumMember="UI.ChartDimensionRoleType/Category"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>Montant_Total</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+
+                        <PropertyValue Property="MeasureAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="Measure"
+                                                   PropertyPath="Montant_Total"/>
+                                    <PropertyValue Property="Role"
+                                                   EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+
+                    </Record>
+                </Annotation>
+
+                <Annotation Term="UI.PresentationVariant"
+                            Qualifier="VFUnpaidByPartner">
+
+                    <Record Type="UI.PresentationVariantType">
+
+                        <PropertyValue Property="SortOrder">
+                            <Collection>
+                                <Record Type="Common.SortOrderType">
+                                    <PropertyValue Property="Property"
+                                                   PropertyPath="Montant_Total"/>
+                                    <PropertyValue Property="Descending"
+                                                   Bool="true"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+
+                        <PropertyValue Property="MaxItems" Int="10"/>
+
+                        <PropertyValue Property="Visualizations">
+                            <Collection>
+                                <AnnotationPath>@UI.Chart#VFUnpaidByPartner</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+
+                    </Record>
+                </Annotation>
+
+            </Annotations>
+
+            <!-- =========================================================
+                 ValueList wiring
+            ========================================================== -->
+
+            <!-- CessionReason → VF1 -->
+            <Annotations Target="ZC_DASHBOARD4_QUERY_CDS.ZC_DASHBOARD4_QUERYType/Motif_Cession">
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+
+                        <PropertyValue Property="CollectionPath"
+                                       String="ZC_DASHBOARD4_QUERY"/>
+
+                        <PropertyValue Property="PresentationVariantQualifier"
+                                       String="VFCessionReason"/>
+
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                                   PropertyPath="Motif_Cession"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                                   String="Motif_Cession"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <!-- CessionStatus → VF2 -->
+            <Annotations Target="ZC_DASHBOARD4_QUERY_CDS.ZC_DASHBOARD4_QUERYType/Statut_Cession">
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+
+                        <PropertyValue Property="CollectionPath"
+                                       String="ZC_DASHBOARD4_QUERY"/>
+
+                        <PropertyValue Property="PresentationVariantQualifier"
+                                       String="VFPayeImpaye"/>
+
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                                   PropertyPath="Statut_Cession"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                                   String="Statut_Cession"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <!-- CessionYearMonth → VF3 -->
+            <Annotations Target="ZC_DASHBOARD4_QUERY_CDS.ZC_DASHBOARD4_QUERYType/Date_Creation_Facture">
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+
+                        <PropertyValue Property="CollectionPath"
+                                       String="ZC_DASHBOARD4_QUERY"/>
+
+                        <PropertyValue Property="PresentationVariantQualifier"
+                                       String="VFUnpaidTrend"/>
+
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                                   PropertyPath="Date_Creation_Facture"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                                   String="Date_Creation_Facture"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <!-- Partner → VF4 -->
+            <Annotations Target="ZC_DASHBOARD4_QUERY_CDS.ZC_DASHBOARD4_QUERYType/Partenaire">
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+
+                        <PropertyValue Property="CollectionPath"
+                                       String="ZC_DASHBOARD4_QUERY"/>
+
+                        <PropertyValue Property="PresentationVariantQualifier"
+                                       String="VFUnpaidByPartner"/>
+
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                                   PropertyPath="Partenaire"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                                   String="Partenaire"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
