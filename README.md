@@ -7,7 +7,7 @@
 |**Generation Platform**<br>SAP Business Application Studio|
 |**Template Used**<br>Analytical List Page V2|
 |**Service Type**<br>SAP System (ABAP On-Premise)|
-|**Service URL**<br>http://sarra.iliadeconsulting.com:8000/sap/opu/odata/sap/ZC_DASH4_QUERY_CDS|
+|**Service URL**<br>http://*****:8000/sap/opu/odata/sap/ZC_DASH4_QUERY_CDS|
 |**Module Name**<br>dash4|
 |**Application Title**<br>Vue cessions|
 |**Namespace**<br>com.iliade.dash4|
